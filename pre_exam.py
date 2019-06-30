@@ -47,3 +47,31 @@ def func1(list):
 nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 func1(nums)
 
+def func2(list):
+    list.sort()
+    print(list[2])
+
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+func2(nums)
+
+a=3
+b=4
+c=3
+
+if (a+b < c) | (a+c < b) | (b+c < a):
+    print("No triangle possible here!")
+else:
+    if (a == b == c):
+        print("Equal triangle!")
+    elif (a == b) | (a == c) | (b == c):
+        print("Equal-sides triangle!")
+    else:
+        print("Different sided triangle!")
+
+def factorial(number):
+    result = 1
+    for i in range(2, number+1):
+        result = result * i
+    print(result)
+
+factorial(25)
