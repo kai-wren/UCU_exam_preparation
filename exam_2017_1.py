@@ -1,5 +1,6 @@
 from datetime import date
 from datetime import datetime
+from datetime import timedelta
 import time
 
 class TwitterUser:
@@ -26,16 +27,47 @@ class FacebookUser:
         d = datetime.today().replace(minute=10)
         return d
 
-class user(TwitterUser, FacebookUser):
-    pass
+class user_class:
+    
+    def __init__(self, class_obj):
+        self.user_inst = class_obj
+
+    def getUserEmailGeneric(self):
+        if isinstance(self.user_inst, TwitterUser) == True:
+            return self.user_inst.getUserMail()
+        if isinstance(self.user_inst, FacebookUser) == True:
+            return self.user_inst.getEmail()
+    
+    def getCountryGeneric(self):
+        if isinstance(self.user_inst, TwitterUser) == True:
+            return self.user_inst.getCountry()
+        if isinstance(self.user_inst, FacebookUser) == True:
+            return self.user_inst.getUserCountry()
+
+    def getLastActive(self):
+        if isinstance(self.user_inst, TwitterUser) == True:
+            return self.user_inst.getLastActiveTime()
+        if isinstance(self.user_inst, FacebookUser) == True:
+            return self.user_inst.getUserActiveTime()
+        
 
 class MessageSender:
     
     def send(self, text, user, country):
-        usr = user()
-        print(usr.isinstance())
-        text = "1"
-        return text
+        
+        u = user_class(user)
+        ret = None
+        currentTime = datetime.today()
+        if (u.getCountryGeneric() == country) & (currentTime - u.getLastActive() < timedelta (minutes = 60)):
+            ret = u.getUserEmailGeneric()    
+        return ret
 
 MS = MessageSender()
-MS.send('1','1','1')
+
+text = 'Message text!'
+# loggedUsr = TwitterUser()
+# country = 'UA'
+loggedUsr = FacebookUser()
+country = 'UK'
+
+print('Message:', text, 'sent to user', MS.send(text, loggedUsr, country))
