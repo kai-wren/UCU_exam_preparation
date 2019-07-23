@@ -75,3 +75,13 @@ def factorial(number):
     print(result)
 
 factorial(25)
+
+def factorial_rec(number):
+    result = 0
+    if number == 1:
+        result = 1
+    else:
+        result = number * factorial_rec(number-1)
+    return result
+
+print(factorial_rec(25))
