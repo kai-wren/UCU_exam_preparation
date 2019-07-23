@@ -77,10 +77,8 @@ def factorial(number):
 factorial(25)
 
 def factorial_rec(number):
-    result = 0
-    if number == 1:
-        result = 1
-    else:
+    result = 1
+    if number > 1:
         result = number * factorial_rec(number-1)
     return result
 
